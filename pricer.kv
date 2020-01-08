@@ -1,0 +1,83 @@
+WindowManager:
+    HomeScreen:
+    AddScreen:
+    ConfirmScreen:
+
+<HomeScreen>:
+    name: "home"
+
+    GridLayout:
+        rows:3
+
+        GridLayout:
+            cols:2
+
+            Label:
+                text: "Your Items: "
+
+            GridLayout:
+                id: numItems
+
+                GridLayout:
+                    cols: 2
+
+                    Label:
+                        id: itemTitles
+                        text: ""
+                        multiline: True
+
+                    Label:
+                        id: itemInfo
+                        text:""
+                        multiline: True
+
+        Button:
+            text: "Add an Item"
+            on_release:
+                app.root.current = "add"
+                root.manager.transition.direction = "left"
+
+        Button:
+            text: "Show List"
+            on_release:
+                root.printer()
+
+<AddScreen>:
+    name: "add"
+    itemURL: itemURL
+
+    GridLayout:
+        cols:1
+
+        GridLayout:
+            cols:2
+
+            Label:
+                text: "Enter an Item URL: "
+
+            TextInput:
+                id: itemURL
+                multiline: False
+
+        Button:
+            text: "Add Item"
+            on_release:
+                app.root.current = "confirm"
+                root.manager.transition.direction = "left"
+                root.scrape()
+
+
+<ConfirmScreen>:
+    name: "confirm"
+
+    GridLayout:
+        rows:2
+
+        Label:
+            text: "Registered!"
+
+        Button:
+            text: "Go Back"
+            on_release:
+                app.root.current = "home"
+                root.manager.transition.direction = "right"
